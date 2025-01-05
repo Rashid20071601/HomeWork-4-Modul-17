@@ -31,7 +31,7 @@ async def all_users(db: Annotated[Session, Depends(get_db)]):
 @router.get('/user_id')
 async def user_by_id(user_id: int, db: Annotated[Session, Depends(get_db)]):
   user = db.scalars(select(User).where(User.id == user_id))
-  if user_id is None:
+  if user is None:
     return HTTPException(
       status_code=status.HTTP_404_NOT_FOUND,
       detail='User was not found'
